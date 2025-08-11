@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-tailwindcss"
+  ],
+  "rules": {
+    "no-empty-source": null
+  }
+}
+
+
