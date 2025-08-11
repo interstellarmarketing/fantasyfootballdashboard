@@ -23,6 +23,15 @@
 # misc
 .DS_Store
 *.pem
+.eslintcache
+
+# local databases and artifacts
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+fantasy_league.db
+old_dashboard_files/fantasy_league.db
 
 # debug
 npm-debug.log*
@@ -36,6 +45,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# other hosts
+.netlify
+
+# editors
+.vscode/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma

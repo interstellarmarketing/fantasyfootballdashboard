@@ -1,0 +1,179 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Season {
+  year                 Int           @id
+  league_name          String
+  regular_season_weeks Int
+  is_legacy            Boolean
+  draft_picks          DraftPick[]
+  matchups             Matchup[]
+  teams                Team[]
+  transactions         Transaction[]
+
+  @@map("seasons")
+}
+
+model Team {
+  id                Int              @id @default(autoincrement())
+  season_year       Int
+  espn_team_id      Int
+  team_name         String
+  owner_name        String?
+  logo_url          String?
+  wins              Int
+  losses            Int
+  ties              Int
+  points_for        Float
+  final_standing    Int
+  points_against    Float?           @default(0)
+  box_score_players BoxScorePlayer[]
+  draft_picks       DraftPick[]
+  away_matchups     Matchup[]        @relation("AwayTeam")
+  home_matchups     Matchup[]        @relation("HomeTeam")
+  season            Season           @relation(fields: [season_year], references: [year], onDelete: Cascade)
+  TeamSeasonStats   TeamSeasonStats?
+  transactions      Transaction[]
+
+  @@index([season_year])
+  @@index([espn_team_id])
+  @@index([espn_team_id, season_year])
+  @@map("teams")
+}
+
+model Player {
+  id           Int              @id
+  full_name    String
+  position     String?
+  pro_team     String?
+  box_scores   BoxScorePlayer[]
+  draft_picks  DraftPick[]
+  transactions Transaction[]
+
+  @@index([full_name])
+  @@map("players")
+}
+
+model Matchup {
+  id                Int              @id @default(autoincrement())
+  season_year       Int
+  week              Int
+  home_team_id      Int
+  away_team_id      Int? // Optional to allow for bye weeks
+  home_score        Float
+  away_score        Float
+  is_playoff        Boolean
+  is_bye            Boolean?         @default(false)
+  box_score_players BoxScorePlayer[]
+  away_team         Team?            @relation("AwayTeam", fields: [away_team_id], references: [id])
+  home_team         Team             @relation("HomeTeam", fields: [home_team_id], references: [id])
+  season            Season           @relation(fields: [season_year], references: [year], onDelete: Cascade)
+
+  @@index([season_year])
+  @@index([week])
+  @@index([season_year, is_playoff])
+  @@index([home_team_id])
+  @@index([away_team_id])
+  @@map("matchups")
+}
+
+model BoxScorePlayer {
+  id               Int     @id @default(autoincrement())
+  matchup_id       Int
+  team_id          Int
+  player_id        Int
+  slot_position    String
+  points           Float
+  projected_points Float?
+  matchup          Matchup @relation(fields: [matchup_id], references: [id])
+  player           Player  @relation(fields: [player_id], references: [id])
+  team             Team    @relation(fields: [team_id], references: [id])
+
+  @@index([matchup_id])
+  @@index([team_id])
+  @@index([player_id])
+  @@map("box_score_players")
+}
+
+model DraftPick {
+  id          Int    @id @default(autoincrement())
+  season_year Int
+  team_id     Int
+  player_id   Int
+  round_num   Int
+  round_pick  Int
+  bid_amount  Int?
+  player      Player @relation(fields: [player_id], references: [id])
+  season      Season @relation(fields: [season_year], references: [year], onDelete: Cascade)
+  team        Team   @relation(fields: [team_id], references: [id])
+
+  @@index([season_year])
+  @@index([team_id])
+  @@index([player_id])
+  @@map("draft_picks")
+}
+
+model TeamSeasonStats {
+  id              Int   @id @default(autoincrement())
+  season_year     Int
+  team_id         Int   @unique
+  wins            Int
+  losses          Int
+  ties            Int
+  points_for      Float
+  points_against  Float
+  actual_rank     Int
+  power_rank      Int
+  median_rank     Int
+  combined_rank   Int
+  power_wins      Int   @default(0)
+  power_losses    Int   @default(0)
+  power_ties      Int   @default(0)
+  median_wins     Int   @default(0)
+  median_losses   Int   @default(0)
+  median_ties     Int   @default(0)
+  combined_wins   Int   @default(0)
+  combined_losses Int   @default(0)
+  combined_ties   Int   @default(0)
+  team            Team  @relation(fields: [team_id], references: [id])
+
+  @@unique([season_year, team_id])
+  @@map("team_season_stats")
+}
+
+model LeagueRecord {
+  id          Int    @id @default(autoincrement())
+  season_year Int
+  week        Int
+  record_type String // e.g., "highest_score", "lowest_score", "blowout", "nailbiter"
+  team_id     Int?
+  matchup_id  Int?
+  value       Float // The score or margin of victory
+
+  @@index([season_year, record_type])
+  @@map("league_records")
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  season_year Int
+  week        Int
+  type        String // e.g., "WAIVER", "TRADE_ACQUIRED", "TRADE_GAVE_AWAY", "FREE_AGENT"
+  team_id     Int
+  player_id   Int
+  created_at  DateTime @default(now())
+
+  season Season @relation(fields: [season_year], references: [year], onDelete: Cascade)
+  team   Team   @relation(fields: [team_id], references: [id])
+  player Player @relation(fields: [player_id], references: [id])
+
+  @@index([season_year])
+  @@index([team_id])
+  @@map("transactions")
+}
