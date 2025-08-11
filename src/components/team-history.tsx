@@ -164,16 +164,14 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
     return (
         <div className="space-y-6">
             {/* Enhanced Header Card */}
-            <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-6 rounded-lg shadow-md border border-purple-700">
+            <div className="card card--gradient p-6 shadow-md">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
                         <h1 className="text-4xl font-bold text-white mb-2">{data.team_name}</h1>
                         <p className="text-xl text-purple-200">Managed by {data.owner_name}</p>
                     </div>
                     <div className="mt-4 md:mt-0">
-                        <div className="inline-flex items-center px-4 py-2 bg-purple-700 text-white rounded-lg">
-                            <span className="text-sm font-medium">Team ID: {teamId}</span>
-                        </div>
+                        <span className="badge"><span className="text-sm font-medium">Team ID: {teamId}</span></span>
                     </div>
                 </div>
                 
@@ -208,7 +206,7 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
 
             {/* Performance Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-6 rounded-lg shadow-md border border-purple-700">
+                <div className="card card--gradient p-6 shadow-md">
                     <h3 className="text-lg font-semibold text-white mb-4">Season Score Trend</h3>
                     <PerformanceChart 
                         data={sortedHistory}
@@ -217,7 +215,7 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
                         label="Season Score"
                     />
                 </div>
-                <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-6 rounded-lg shadow-md border border-purple-700">
+                <div className="card card--gradient p-6 shadow-md">
                     <h3 className="text-lg font-semibold text-white mb-4">Points For Trend</h3>
                     <PerformanceChart 
                         data={sortedHistory}
@@ -229,7 +227,7 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
             </div>
 
             {/* Enhanced Season History */}
-            <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-6 rounded-lg shadow-md border border-purple-700">
+            <div className="card card--gradient p-6 shadow-md">
                 <div className="flex flex-col md:flex-row justify-between md:items-center mb-6 space-y-4 md:space-y-0">
                     <div>
                         <h2 className="text-xl md:text-2xl font-semibold text-white">Season History</h2>
@@ -243,7 +241,7 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
                             id="sort-select" 
                             value={sortKey} 
                             onChange={handleSortChange} 
-                            className="p-2 rounded-md bg-purple-800 text-white border border-purple-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                            className="select"
                         >
                             <option value="year">Season</option>
                             <option value="season_score">Season Score</option>

@@ -59,12 +59,12 @@ export default function RecordsTable({ records, title, type }: RecordsTableProps
     const headers = getHeaders();
 
     return (
-        <div className="bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-lg overflow-hidden">
+        <div className="card card--gradient rounded-lg shadow-lg overflow-hidden">
             <div className="px-3 sm:px-5 py-3 border-b border-white/10">
                 <h3 className="text-lg font-semibold text-white">{title}</h3>
             </div>
             <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
-                <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm">
+                <table className="table">
                     <thead className="bg-indigo-900">
                         <tr className="border-b border-black">
                             {headers.map((header) => (

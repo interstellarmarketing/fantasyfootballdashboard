@@ -69,7 +69,7 @@ export default function TeamsList() {
 
     return (
         <main className="space-y-6">
-            <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-2 sm:p-4 rounded-lg shadow-md flex items-center justify-between text-white">
+            <div className="card card--gradient p-2 sm:p-4 shadow-md flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold">Teams</h1>
                     <p className="text-purple-200">View all teams and their performance</p>
@@ -80,7 +80,7 @@ export default function TeamsList() {
                         id="year-select" 
                         value={year} 
                         onChange={handleYearChange} 
-                        className="p-2 rounded-md bg-purple-800 text-white border border-purple-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                        className="select"
                     >
                         {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                     </select>
@@ -101,7 +101,7 @@ export default function TeamsList() {
                         <Link 
                             key={team.team_id} 
                             href={`/team/${team.team_id}`}
-                            className="block bg-gradient-to-br from-blue-900 to-purple-900 p-2 sm:p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow border border-purple-700 hover:border-purple-500 text-white"
+                            className="block card card--gradient p-2 sm:p-6 shadow-md hover:shadow-lg transition-shadow hover:border-purple-500"
                         >
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-lg font-semibold">{team.team_name}</h3>

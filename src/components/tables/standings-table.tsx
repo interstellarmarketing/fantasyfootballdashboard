@@ -120,7 +120,7 @@ export default function StandingsTable({
     const standingsData = getStandingsData();
 
     return (
-        <div className="bg-gradient-to-br from-blue-900 to-purple-900 px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
+        <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-lg">
             {/* Header with tabs */}
             <div className="flex items-center justify-between mb-3">
                 <h3 className="text-base sm:text-lg font-semibold text-white">League Standings — {year}</h3>
@@ -145,7 +145,7 @@ export default function StandingsTable({
                         <button
                             key={tab.key}
                             onClick={() => setActiveTab(tab.key as StandingsType)}
-                            className={`justify-center whitespace-nowrap rounded-md px-4 py-2.5 text-sm font-medium transition-all duration-200 ease-in-out hover:bg-gray-800 hover:text-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex items-center gap-2 ${
+                            className={`btn btn--tab flex items-center gap-2 ${
                                 activeTab === tab.key ? 'bg-indigo-600 text-white shadow-sm' : ''
                             }`}
                         >
@@ -158,7 +158,7 @@ export default function StandingsTable({
 
             {/* Table */}
             <div className="relative w-full overflow-auto rounded-lg">
-                <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm touch-pan-x">
+                <table className="table touch-pan-x">
                     <thead className="bg-indigo-900">
                         <tr className="border-b border-black">
                             <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs">Rank</th>
@@ -226,8 +226,8 @@ export default function StandingsTable({
 
             {/* Info Modal */}
             {showInfoModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                    <div className="bg-purple-900 text-white rounded-lg p-6 max-w-xl w-full mx-4 border border-purple-700 shadow-xl">
+                <div className="modal-overlay">
+                    <div className="modal max-w-xl w-full mx-4">
                         <div className="flex justify-between items-center mb-2">
                             <h3 className="text-xl font-semibold">Standings Categories</h3>
                             <button

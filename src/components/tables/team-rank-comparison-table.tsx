@@ -78,7 +78,7 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
   ];
 
   return (
-    <div className="bg-gradient-to-br from-blue-900 to-purple-900 px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
+    <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-lg">
       <div className="flex items-start justify-between mb-3">
         <div>
           <h3 className="text-base sm:text-lg font-semibold text-white">Team Rank Comparison</h3>
@@ -173,8 +173,8 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
       </div>
       {/* Info Modal */}
       {showInfoModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-purple-900 text-white rounded-lg p-6 max-w-xl w-full mx-4 border border-purple-700 shadow-xl">
+        <div className="modal-overlay">
+          <div className="modal max-w-xl w-full mx-4">
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-xl font-semibold">Standings Categories</h3>
               <button

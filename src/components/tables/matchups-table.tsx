@@ -46,8 +46,8 @@ export default function MatchupsTable({ matchups, title = "Matchups" }: Matchups
     };
 
     return (
-        <div className="relative w-full overflow-auto bg-gradient-to-br from-blue-900 to-purple-900 rounded-lg shadow-lg px-2 py-4 sm:px-4 sm:py-6">
-            <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm">
+        <div className="relative w-full overflow-auto card card--gradient rounded-lg shadow-lg px-2 py-4 sm:px-4 sm:py-6">
+            <table className="table">
                 <thead className="bg-indigo-900">
                     <tr className="border-b border-black">
                         <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Round</th>

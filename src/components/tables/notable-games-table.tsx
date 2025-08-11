@@ -36,7 +36,7 @@ export default function NotableGamesTable({ best, worst, brutal, pathetic }: Not
   const rows = activeTab === 'best' ? best : activeTab === 'worst' ? worst : activeTab === 'brutal' ? brutal : pathetic;
 
   return (
-    <div className="bg-gradient-to-br from-blue-900 to-purple-900 px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
+    <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-lg">
       <div className="bg-indigo-900 px-3 py-3 border-b border-white/10 rounded-t-md -mx-2 sm:-mx-4 mb-2 sm:mb-3">
         <h3 className="text-white font-bold text-lg">Notable Games</h3>
       </div>
@@ -60,7 +60,7 @@ export default function NotableGamesTable({ best, worst, brutal, pathetic }: Not
 
       {/* Table */}
       <div className="relative w-full overflow-auto rounded-lg">
-        <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm">
+        <table className="table">
           <thead className="bg-indigo-900">
             <tr className="border-b border-black">
               <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Matchup</th>

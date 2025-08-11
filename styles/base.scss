@@ -1,13 +1,5 @@
-@import "tailwindcss";
-
-@custom-variant dark (&:is(.dark *));
-
 /* Import tokens and components layer */
 @import "./_tokens.scss";
 @import "./_components.scss";
-
-@layer base {
-  body { @apply bg-background text-foreground; }
-}
 
 
