@@ -78,9 +78,9 @@ export default function LeagueDashboard() {
         <main className="space-y-4 sm:space-y-6">
             <div className="text-white">
                 <h1 className="text-lg sm:text-2xl font-bold mb-2">League Homepage</h1>
-                <div className="bg-gradient-to-br from-blue-900 to-purple-900 p-2 sm:p-3 rounded-lg shadow-md inline-flex items-center text-white">
+                <div className="card card--gradient p-2 sm:p-3 shadow-md inline-flex items-center">
                     <label htmlFor="year-select" className="font-semibold mr-3 text-sm sm:text-base">Select Season:</label>
-                    <select id="year-select" value={year} onChange={handleYearChange} className="px-2 py-1 sm:px-3 sm:py-2 rounded-md bg-purple-800 text-white border border-purple-700 text-sm">
+                    <select id="year-select" value={year} onChange={handleYearChange} className="select text-sm">
                         {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
                     </select>
                 </div>

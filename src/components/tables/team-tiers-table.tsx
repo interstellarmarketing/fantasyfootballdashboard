@@ -73,7 +73,7 @@ export default function TeamTiersTable({ standings }: TeamTiersTableProps) {
     const tierOrder = ['Contender', 'Mid-Tier', 'Get On The Stick', 'Dumpster Fire. Awful.'];
 
     return (
-        <div className="bg-gradient-to-br from-blue-900 to-purple-900 px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
+        <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
             <div className="bg-indigo-900 px-3 py-3 border-b border-white/10 rounded-t-md -mx-2 sm:-mx-4 mb-2 sm:mb-3">
                 <h3 className="text-white font-bold text-lg">Team Tiers</h3>
             </div>

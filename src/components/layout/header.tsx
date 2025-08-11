@@ -37,10 +37,8 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  isActive(item.href)
-                    ? 'bg-gray-700 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                className={`btn btn--tab text-sm font-medium ${
+                  isActive(item.href) ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-300'
                 }`}
               >
                 {item.name}
@@ -75,10 +73,8 @@ export default function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className={`block px-4 py-2 text-sm transition-colors ${
-                isActive(item.href)
-                  ? 'bg-gray-700 text-white'
-                  : 'text-gray-200 hover:bg-gray-700 hover:text-white'
+              className={`block btn btn--tab text-sm ${
+                isActive(item.href) ? 'bg-indigo-600 text-white shadow-sm' : 'text-gray-200'
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >

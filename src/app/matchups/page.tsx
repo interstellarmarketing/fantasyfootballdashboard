@@ -101,7 +101,7 @@ export default function MatchupsPage() {
             id="year-select" 
             value={year} 
             onChange={handleYearChange} 
-            className="p-2 rounded-md bg-purple-800 text-white border border-purple-700"
+            className="select"
           >
             {yearOptions.map(y => <option key={y} value={y}>{y}</option>)}
           </select>
@@ -111,7 +111,7 @@ export default function MatchupsPage() {
             id="filter-select" 
             value={filter} 
             onChange={handleFilterChange} 
-            className="p-2 rounded-md bg-purple-800 text-white border border-purple-700"
+            className="select"
           >
             <option value="all">All Games</option>
             <option value="regular">Regular Season</option>
@@ -123,7 +123,7 @@ export default function MatchupsPage() {
       {data && (
         <div className="space-y-6">
           {/* Season Stats */}
-          <div className="bg-gradient-to-br from-blue-900 to-purple-900 shadow rounded-lg p-2 sm:p-6 border border-purple-700">
+          <div className="card card--gradient shadow rounded-lg p-2 sm:p-6">
             <h2 className="text-xl font-semibold mb-4 text-white">{data.year} Season Statistics</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-4 bg-blue-800/50 rounded-lg">
@@ -146,7 +146,7 @@ export default function MatchupsPage() {
           </div>
 
           {/* Matchups Table */}
-          <div className="bg-gradient-to-br from-blue-900 to-purple-900 shadow rounded-lg p-2 sm:p-6">
+          <div className="card card--gradient shadow rounded-lg p-2 sm:p-6">
             <h2 className="text-xl font-semibold mb-4 text-white">
               {filter === 'all' ? 'All Matchups' : 
                filter === 'regular' ? 'Regular Season Matchups' : 
