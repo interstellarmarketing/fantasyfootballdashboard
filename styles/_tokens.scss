@@ -1,0 +1,10 @@
+/* Token additions layered on top of existing Tailwind v4 @theme in src/app/globals.css */
+
+:root {
+  /* z-index tokens */
+  --z-modal: 50;
+}
+
+/* Note: Core color and radius tokens are already defined in src/app/globals.css via @theme inline. */
+
+

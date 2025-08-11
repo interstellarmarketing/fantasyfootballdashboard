@@ -1,0 +1,33 @@
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 px-4 py-2;
+  }
+  .btn--primary { @apply bg-primary text-primary-foreground hover:opacity-90; }
+  .btn--tab { @apply rounded-md px-4 py-2.5 text-sm hover:bg-gray-800 hover:text-gray-100; }
+
+  /* Cards */
+  .card { @apply bg-card text-card-foreground rounded-lg shadow-md border border-border; }
+  .card--gradient { @apply bg-gradient-to-br from-blue-900 to-purple-900 text-white border border-purple-700; }
+
+  /* Tables */
+  .table { @apply w-full table-auto caption-bottom text-[12px] sm:text-sm; }
+  .table thead { @apply bg-indigo-900; }
+  .table th { @apply h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs; }
+  .table tbody { @apply divide-y divide-white/10; }
+  .table tr { @apply border-b border-black hover:bg-white/10 transition-colors; }
+
+  /* Inputs */
+  .input { @apply w-full rounded-md border px-3 py-2 focus-visible:ring-2 bg-input text-foreground border-border; }
+  .select { @apply rounded-md bg-purple-800 text-white border border-purple-700 focus:ring-2 focus:ring-purple-500 focus:border-purple-500; }
+
+  /* Badges/Chips */
+  .badge { @apply inline-flex items-center rounded-full px-2 py-1 text-xs bg-black/50 text-white border border-white/20; }
+  .chip { @apply inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/20 px-2 py-1 text-xs text-white; }
+
+  /* Modal */
+  .modal-overlay { @apply fixed inset-0 bg-black/50 flex items-center justify-center; }
+  .modal { @apply bg-purple-900 text-white rounded-lg p-6 border border-purple-700 shadow-xl; }
+}
+
+
