@@ -69,8 +69,8 @@ async function calculatePowerStandings(year: number, teams: TeamBasics[]) {
     console.log('Teams:', teams.map(t => ({ id: t.id, name: t.team_name, espn_id: t.espn_team_id })));
     console.log('Sample matchups:', matchups.slice(0, 3).map(m => ({
         week: m.week,
-        home: { id: m.home_team_id, name: m.home_team.team_name, score: m.home_score },
-        away: { id: m.away_team_id, name: m.away_team.team_name, score: m.away_score }
+        home: { id: m.home_team_id, name: m.home_team?.team_name ?? 'TBD', score: m.home_score },
+        away: { id: m.away_team_id ?? -1, name: m.away_team?.team_name ?? 'BYE', score: m.away_score }
     })));
     
     // Debug: Check if Gridiron Mandingos exists
@@ -278,7 +278,7 @@ async function getPlayoffBracket(year: number, teams: TeamBasics[]) {
 
     const processMatchup = (m: Prisma.MatchupGetPayload<{ include: { home_team: true; away_team: true } }>) => {
         const hInfo = teamIdMap.get(m.home_team_id);
-        const aInfo = teamIdMap.get(m.away_team_id);
+        const aInfo = m.away_team_id != null ? teamIdMap.get(m.away_team_id) : undefined;
         const hName = hInfo ? `(${hInfo.seed}) ${hInfo.name}` : "TBD";
         const aName = aInfo ? `(${aInfo.seed}) ${aInfo.name}` : "TBD";
         const winner = m.home_score > m.away_score ? hName : (m.away_score > m.home_score ? aName : "TBD");
@@ -288,7 +288,7 @@ async function getPlayoffBracket(year: number, teams: TeamBasics[]) {
             away_team: aName,
             away_score: m.away_score,
             winner: winner,
-            link: `/matchups/${year}/${m.week}/${m.home_team_id}/${m.away_team_id}`
+            link: `/matchups/${year}/${m.week}/${m.home_team_id}/${m.away_team_id ?? ''}`
         };
     };
 
@@ -327,13 +327,10 @@ async function getPlayoffBracket(year: number, teams: TeamBasics[]) {
 
 export async function GET(
     req: Request,
-    { params }: { params: Promise<{ year: string }> }
+    context: unknown
 ) {
-    // This line is the definitive fix. Accessing the URL forces the request to be processed.
-    const { searchParams } = new URL(req.url);
-
-    const resolvedParams = await params;
-    const year = parseInt(resolvedParams.year, 10);
+    const { params } = context as { params: { year: string } };
+    const year = parseInt(params.year, 10);
 
     const season = await prisma.season.findUnique({
         where: { year },
