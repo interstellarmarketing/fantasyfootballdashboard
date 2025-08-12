@@ -37,10 +37,10 @@ export async function GET(
 
         console.log(`Matchups found for year ${year}, week ${week}:`, allMatchups.map(m => ({
             id: m.id,
-            home_team: m.home_team.team_name,
-            away_team: m.away_team.team_name,
+            home_team: m.home_team?.team_name ?? 'TBD',
+            away_team: m.away_team?.team_name ?? 'BYE',
             home_team_id: m.home_team_id,
-            away_team_id: m.away_team_id
+            away_team_id: m.away_team_id ?? -1
         })));
 
         // Find the specific matchup
@@ -83,10 +83,10 @@ export async function GET(
                     available_teams: teams,
                     available_matchups: allMatchups.map(m => ({
                         id: m.id,
-                        home_team: m.home_team.team_name,
-                        away_team: m.away_team.team_name,
+                        home_team: m.home_team?.team_name ?? 'TBD',
+                        away_team: m.away_team?.team_name ?? 'BYE',
                         home_team_id: m.home_team_id,
-                        away_team_id: m.away_team_id
+                        away_team_id: m.away_team_id ?? -1
                     }))
                 }
             }, { status: 404 });
