@@ -86,7 +86,7 @@ export default function DetailedMatchupPage() {
     const homeWinner = winner === home_team.name;
     const awayWinner = winner === away_team.name;
 
-    const renderPlayerRow = (player: Player, isHome: boolean) => (
+    const renderPlayerRow = (player: Player, _isHome: boolean) => (
         <tr key={player.id} className={player.is_starter ? 'bg-blue-50' : 'bg-gray-50'}>
             <td className="px-4 py-2 text-sm">
                 <div className="flex items-center space-x-2">

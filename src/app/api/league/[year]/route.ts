@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
-async function getLuckIndex(year: number, teams: any[]) {
+type TeamBasics = Prisma.TeamGetPayload<{ select: { id: true; team_name: true; espn_team_id: true; wins: true; losses: true; ties: true; points_for: true; points_against: true; final_standing: true } }>
+
+async function getLuckIndex(year: number, teams: TeamBasics[]) {
     const allScoresQuery = await prisma.matchup.findMany({
         where: { season_year: year, is_playoff: false },
         select: { week: true, home_score: true, away_score: true }
@@ -42,7 +45,7 @@ async function getLuckIndex(year: number, teams: any[]) {
     return luckData.sort((a, b) => b.luck_index - a.luck_index);
 }
 
-async function calculatePowerStandings(year: number, teams: any[]) {
+async function calculatePowerStandings(year: number, teams: TeamBasics[]) {
     // Get all regular season matchups
     const matchups = await prisma.matchup.findMany({
         where: { season_year: year, is_playoff: false },
@@ -141,7 +144,7 @@ async function calculatePowerStandings(year: number, teams: any[]) {
     return powerStandings.sort((a, b) => b.win_percentage - a.win_percentage);
 }
 
-async function calculateMedianStandings(year: number, teams: any[]) {
+async function calculateMedianStandings(year: number, teams: TeamBasics[]) {
     // Get all regular season matchups
     const matchups = await prisma.matchup.findMany({
         where: { season_year: year, is_playoff: false },
@@ -202,7 +205,7 @@ async function calculateMedianStandings(year: number, teams: any[]) {
     return medianStandings.sort((a, b) => b.win_percentage - a.win_percentage);
 }
 
-async function calculateCombinedStandings(year: number, teams: any[]) {
+async function calculateCombinedStandings(year: number, teams: TeamBasics[]) {
     // Get actual standings
     const actualStandings = teams.map(t => ({
         team_id: t.espn_team_id,
@@ -247,7 +250,7 @@ async function calculateCombinedStandings(year: number, teams: any[]) {
     return combinedStandings.sort((a, b) => b.win_percentage - a.win_percentage);
 }
 
-async function getPlayoffBracket(year: number, teams: any[]) {
+async function getPlayoffBracket(year: number, teams: TeamBasics[]) {
     const teamIdMap = new Map(teams.map(team => [team.id, { name: team.team_name, seed: team.final_standing, espn_team_id: team.espn_team_id }]));
 
     const playoffMatchups = await prisma.matchup.findMany({
@@ -256,7 +259,7 @@ async function getPlayoffBracket(year: number, teams: any[]) {
         include: { home_team: true, away_team: true }
     });
 
-    const winnersByWeek: { [week: number]: any[] } = {};
+    const winnersByWeek: { [week: number]: Prisma.MatchupGetPayload<{ include: { home_team: true; away_team: true } }>[] } = {};
     for (const matchup of playoffMatchups) {
         if (!winnersByWeek[matchup.week]) {
             winnersByWeek[matchup.week] = [];
@@ -264,12 +267,12 @@ async function getPlayoffBracket(year: number, teams: any[]) {
         winnersByWeek[matchup.week].push(matchup);
     }
 
-    const bracket: { rounds: { [key: string]: any[] } } = { rounds: {} };
+    const bracket: { rounds: { [key: string]: Array<{ home_team: string; home_score: number; away_team: string; away_score: number; winner: string; link: string }> } } = { rounds: {} };
     if (Object.keys(winnersByWeek).length === 0) {
         return bracket;
     }
 
-    const processMatchup = (m: any) => {
+    const processMatchup = (m: Prisma.MatchupGetPayload<{ include: { home_team: true; away_team: true } }>) => {
         const hInfo = teamIdMap.get(m.home_team_id);
         const aInfo = teamIdMap.get(m.away_team_id);
         const hName = hInfo ? `(${hInfo.seed}) ${hInfo.name}` : "TBD";

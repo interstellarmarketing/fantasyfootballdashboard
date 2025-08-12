@@ -4,13 +4,15 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchJSON } from '@/lib/api';
 import RecordsTable from '@/components/tables/records-table';
 
+interface MatchupRecord { rank: number; matchup: string; year: number; value: number; score?: string; margin?: string }
+interface TeamRecord { rank: number; team: string; year: number; value: number }
 interface RecordBookData {
-  shootouts: any[];
-  snoozers: any[];
-  blowouts: any[];
-  nailbiters: any[];
-  top_scores: any[];
-  low_scores: any[];
+  shootouts: MatchupRecord[];
+  snoozers: MatchupRecord[];
+  blowouts: MatchupRecord[];
+  nailbiters: MatchupRecord[];
+  top_scores: TeamRecord[];
+  low_scores: TeamRecord[];
 }
 
 export default function RecordBookPage() {

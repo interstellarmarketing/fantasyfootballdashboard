@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 export async function GET(
     req: Request,
@@ -103,7 +104,8 @@ export async function GET(
         const awayPlayers = matchup.box_score_players.filter(player => player.team_id === awayTeam.id);
 
         // Process player data
-        const processPlayers = (players: any[]) => {
+        type PlayerRow = Prisma.BoxScorePlayerGetPayload<{ include: { player: true; team: true } }>;
+        const processPlayers = (players: PlayerRow[]) => {
             return players.map(player => ({
                 id: player.player.id,
                 name: player.player.full_name,

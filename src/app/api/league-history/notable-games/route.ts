@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 
 type NotableItem = {
   year: number;
@@ -96,9 +97,10 @@ export async function GET() {
         TeamSeasonStats: true,
       },
     });
-    const seasonToTeams = new Map<number, typeof teamsBySeason>();
+    type TeamWithStats = Prisma.TeamGetPayload<{ select: { id: true; season_year: true; team_name: true; wins: true; losses: true; ties: true; points_for: true; TeamSeasonStats: true } }>;
+    const seasonToTeams = new Map<number, TeamWithStats[]>();
     for (const t of teamsBySeason) {
-      if (!seasonToTeams.has(t.season_year)) seasonToTeams.set(t.season_year, [] as any);
+      if (!seasonToTeams.has(t.season_year)) seasonToTeams.set(t.season_year, []);
       seasonToTeams.get(t.season_year)!.push(t);
     }
 
@@ -138,7 +140,7 @@ export async function GET() {
       return wins / games;
     }
 
-    function strengthRankPercent(team: { TeamSeasonStats: any | null }, seasonTeams: any[]): number {
+    function strengthRankPercent(team: { TeamSeasonStats: { combined_rank: number } | null }, seasonTeams: TeamWithStats[]): number {
       // Use combined_rank when available; lower rank is better. Convert to 0..1 percentile (1 best)
       const ranks = seasonTeams
         .map((t) => t.TeamSeasonStats?.combined_rank ?? Number.POSITIVE_INFINITY)

@@ -11,7 +11,7 @@ type TeamWithRelations = Prisma.TeamGetPayload<{
 }>;
 
 // Pre-calculate all scores by season and week for efficient lookups
-function buildScoresBySeasonWeek(matchups: any[]) {
+function buildScoresBySeasonWeek(matchups: Prisma.MatchupGetPayload<{ select: { season_year: true; week: true; home_score: true; away_score: true } }>[]) {
     const scoresBySeasonWeek: { [year: number]: { [week: number]: number[] } } = {};
     
     for (const m of matchups) {
