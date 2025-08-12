@@ -48,20 +48,20 @@ export default function MatchupsTable({ matchups, title = "Matchups" }: Matchups
     return (
         <div className="relative w-full overflow-auto card card--gradient rounded-lg shadow-lg px-2 py-4 sm:px-4 sm:py-6">
             <table className="table">
-                <thead className="bg-indigo-900">
-                    <tr className="border-b border-black">
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Round</th>
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Home Team</th>
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Score</th>
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Away Team</th>
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Margin</th>
-                        <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">Total</th>
+                <thead>
+                    <tr>
+                        <th>Round</th>
+                        <th>Home Team</th>
+                        <th className="text-center">Score</th>
+                        <th>Away Team</th>
+                        <th className="text-center">Margin</th>
+                        <th className="text-center">Total</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+                <tbody>
                     {matchups.map((matchup) => (
-                        <tr key={matchup.id} className="hover:bg-white/10 transition-colors border-b border-black">
-                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-medium text-white text-left">
+                        <tr key={matchup.id}>
+                            <td className="font-medium">
                                 <Link href={matchup.detail_link} className="block">
                                     <span className={`px-2 py-1 rounded-full text-xs ${
                                         matchup.is_playoff 
@@ -72,7 +72,7 @@ export default function MatchupsTable({ matchups, title = "Matchups" }: Matchups
                                     </span>
                                 </Link>
                             </td>
-                            <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm ${getWinnerStyle(matchup.home_team, matchup.winner).replace('text-gray-700', 'text-white').replace('text-green-600', 'text-green-300')}`}>
+                            <td className={`${getWinnerStyle(matchup.home_team, matchup.winner).replace('text-gray-700', 'text-white').replace('text-green-600', 'text-green-300')}`}>
                                 <Link href={matchup.detail_link} className="block hover:text-gray-200">
                                     <span className="inline-flex items-center gap-2 min-w-0">
                                         {matchup.home_team_logo ? (
@@ -86,12 +86,12 @@ export default function MatchupsTable({ matchups, title = "Matchups" }: Matchups
                                     </span>
                                 </Link>
                             </td>
-                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-mono text-white text-center">
+                            <td className="font-mono text-center">
                                 <Link href={matchup.detail_link} className="block">
                                     {matchup.home_score.toFixed(2)}
                                 </Link>
                             </td>
-                            <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm ${getWinnerStyle(matchup.away_team, matchup.winner).replace('text-gray-700', 'text-white').replace('text-green-600', 'text-green-300')}`}>
+                            <td className={`${getWinnerStyle(matchup.away_team, matchup.winner).replace('text-gray-700', 'text-white').replace('text-green-600', 'text-green-300')}`}>
                                 <Link href={matchup.detail_link} className="block hover:text-gray-200">
                                     <span className="inline-flex items-center gap-2 min-w-0">
                                         {matchup.away_team_logo ? (
@@ -105,12 +105,12 @@ export default function MatchupsTable({ matchups, title = "Matchups" }: Matchups
                                     </span>
                                 </Link>
                             </td>
-                            <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-semibold text-center ${getMarginStyle(matchup.margin).replace('text-yellow-600','text-yellow-300').replace('text-blue-600','text-blue-300').replace('text-red-600','text-red-300')}`}>
+                            <td className={`font-semibold text-center ${getMarginStyle(matchup.margin).replace('text-yellow-600','text-yellow-300').replace('text-blue-600','text-blue-300').replace('text-red-600','text-red-300')}`}>
                                 <Link href={matchup.detail_link} className="block">
                                     {matchup.margin.toFixed(2)} pts
                                 </Link>
                             </td>
-                            <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-semibold text-center ${getTotalScoreStyle(matchup.total_score).replace('text-yellow-600','text-yellow-300').replace('text-blue-600','text-blue-300').replace('text-red-600','text-red-300').replace('text-gray-700','text-white').replace('text-green-600','text-green-300')}`}>
+                            <td className={`font-semibold text-center ${getTotalScoreStyle(matchup.total_score).replace('text-yellow-600','text-yellow-300').replace('text-blue-600','text-blue-300').replace('text-red-600','text-red-300').replace('text-gray-700','text-white').replace('text-green-600','text-green-300')}`}>
                                 <Link href={matchup.detail_link} className="block">
                                     {matchup.total_score.toFixed(2)}
                                 </Link>

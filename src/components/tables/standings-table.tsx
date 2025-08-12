@@ -159,33 +159,33 @@ export default function StandingsTable({
             {/* Table */}
             <div className="relative w-full overflow-auto rounded-lg">
                 <table className="table touch-pan-x">
-                    <thead className="bg-indigo-900">
-                        <tr className="border-b border-black">
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs">Rank</th>
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs">Team</th>
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs text-center">Actual Record</th>
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs text-center">PF</th>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Team</th>
+                            <th className="text-center">Actual Record</th>
+                            <th className="text-center">PF</th>
                             {showPointsAgainst && (
-                                <th className="h-10 sm:h-12 px-1.5 sm:px-2 align-middle font-medium text-indigo-100 whitespace-normal sm:whitespace-nowrap text-[11px] sm:text-xs text-center">PA</th>
+                                <th className="text-center">PA</th>
                             )}
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+                    <tbody>
                         {standingsData.map((team, index) => {
                             const record = getRecordForTab(team, activeTab);
                             const totalGames = record.wins + record.losses + record.ties;
                             const winPercentage = totalGames > 0 ? record.wins / totalGames : 0;
 
                             return (
-                                <tr key={team.team_id} className="hover:bg-white/10 transition-colors border-b border-black bg-transparent">
-                                    <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-medium text-white text-center align-middle">
+                                <tr key={team.team_id}>
+                                    <td className="text-center font-medium">
                                         {index + 1}
                                     </td>
-                                    <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-medium text-white align-middle">
+                                    <td className="font-medium">
                                         <div className="flex items-center gap-2">
                                             <Link 
                                                 href={`/team/${team.team_id}`}
-                                                className="flex items-center gap-2 min-w-0 flex-1 text-white hover:text-gray-200 transition-colors"
+                                                className="flex items-center gap-2 min-w-0 flex-1 hover:text-gray-200 transition-colors"
                                             >
                                                 {team.team.logo_url ? (
                                                     <img
@@ -206,14 +206,14 @@ export default function StandingsTable({
                                             )}
                                         </div>
                                     </td>
-                                    <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-medium text-white text-center align-middle`}>
+                                    <td className="text-center font-medium">
                                         {record.wins}-{record.losses}-{record.ties}
                                     </td>
-                                    <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-normal text-white text-center align-middle`}>
+                                    <td className="text-center">
                                         {team.points_for.toFixed(1)}
                                     </td>
                                     {showPointsAgainst && (
-                                        <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 sm:whitespace-nowrap whitespace-normal text-[12px] sm:text-sm font-normal text-white text-center align-middle`}>
+                                        <td className="text-center">
                                             {team.points_against.toFixed(1)}
                                         </td>
                                     )}

@@ -97,26 +97,19 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
       </div>
 
       <div className="relative w-full overflow-auto rounded-lg">
-        <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm">
-          <thead className="bg-indigo-900">
-            <tr className="border-b border-black">
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">
-                Team
-              </th>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Team</th>
               {columns.map((c) => (
-                <th
-                  key={c.key}
-                  className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs"
-                >
-                  {c.label}
-                </th>
+                <th key={c.key} className="text-center">{c.label}</th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+          <tbody>
             {rows.map((r) => (
-              <tr key={r.team_id} className="hover:bg-white/10 transition-colors border-b border-black">
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">
+              <tr key={r.team_id}>
+                <td>
                   <Link
                     href={`/team/${r.team_id}`}
                     className="flex items-center gap-2 hover:text-gray-200 transition-colors min-w-0"
@@ -151,11 +144,7 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
                   const color = colorClass(percent);
                   const title = `${rank} of ${numTeams}`;
                   return (
-                    <td
-                      key={c.key}
-                      className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center"
-                      title={title}
-                    >
+                    <td key={c.key} className="text-center" title={title}>
                       <div className="w-full h-2.5 sm:h-3 rounded-full bg-white/10 overflow-hidden">
                         <div
                           className={`h-full rounded-full bg-gradient-to-r ${color}`}

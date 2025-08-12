@@ -65,61 +65,58 @@ export default function RecordsTable({ records, title, type }: RecordsTableProps
             </div>
             <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
                 <table className="table">
-                    <thead className="bg-indigo-900">
-                        <tr className="border-b border-black">
+                    <thead>
+                        <tr>
                             {headers.map((header) => (
-                                <th 
-                                    key={header}
-                                    className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs"
-                                >
+                                <th key={header} className={header === 'Year' || header === 'Value' || header === 'Score' || header === 'Margin' ? 'text-center' : ''}>
                                     {header}
                                 </th>
                             ))}
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+                    <tbody>
                         {records.map((record, index) => {
                             const rowColor = getRowColor(record, index);
                             const valueDisplay = getValueDisplay(record);
                             
                             return (
-                                <tr key={index} className={`${rowColor} hover:bg-white/10 transition-colors border-b border-black`}>
-                                    <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm font-medium text-white text-left">
+                                <tr key={index} className={rowColor}>
+                                    <td className="font-medium">
                                         {record.rank || index + 1}
                                     </td>
                                     {type === 'shootouts' || type === 'snoozers' ? (
                                         <>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">
+                                            <td>
                                                 <span className="break-words leading-6">{record.matchup}</span>
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white/70">
+                                            <td className="text-center">
                                                 {record.year}
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm font-semibold text-white">
+                                            <td className="font-semibold text-center">
                                                 {valueDisplay}
                                             </td>
                                         </>
                                     ) : type === 'blowouts' || type === 'nailbiters' ? (
                                         <>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">
+                                            <td>
                                                 <span className="break-words leading-6">{record.matchup}</span>
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white/70">
+                                            <td className="text-center">
                                                 {record.year}
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm font-semibold text-white">
+                                            <td className="font-semibold text-center">
                                                 {valueDisplay}
                                             </td>
                                         </>
                                     ) : (
                                         <>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">
+                                            <td>
                                                 <span className="break-words leading-6">{record.team}</span>
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white/70">
+                                            <td className="text-center">
                                                 {record.year}
                                             </td>
-                                            <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm font-semibold text-white">
+                                            <td className="font-semibold text-center">
                                                 {valueDisplay}
                                             </td>
                                         </>

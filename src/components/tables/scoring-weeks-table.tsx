@@ -61,23 +61,17 @@ export default function ScoringWeeksTable({ records, standings, type }: ScoringW
             {/* Table */}
             <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
                 <table className="table">
-                    <thead className="bg-indigo-900">
-                        <tr className="border-b border-black">
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">
-                                Team
-                            </th>
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">
-                                Week
-                            </th>
-                            <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center text-indigo-100 uppercase tracking-wider align-middle font-medium text-[11px] sm:text-xs">
-                                Points
-                            </th>
+                    <thead>
+                        <tr>
+                            <th>Team</th>
+                            <th className="text-center">Week</th>
+                            <th className="text-center">Points</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+                    <tbody>
                         {sortedRecords.map((record) => (
                             <tr key={`${record.team_id}-${record.week}`} className="hover:bg-white/10 transition-colors border-b border-black">
-                                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">
+                                <td>
                                     <Link 
                                         href={`/team/${record.team_id}`}
                                         className="flex items-center gap-2 hover:text-gray-200 transition-colors min-w-0"
@@ -97,10 +91,10 @@ export default function ScoringWeeksTable({ records, standings, type }: ScoringW
                                         <span className="break-words leading-6">{record.team_name}</span>
                                     </Link>
                                 </td>
-                                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">
+                                <td className="text-center">
                                     {record.week}
                                 </td>
-                                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white font-medium text-center">
+                                <td className="font-medium text-center">
                                     {record.value.toFixed(2)}
                                 </td>
                             </tr>

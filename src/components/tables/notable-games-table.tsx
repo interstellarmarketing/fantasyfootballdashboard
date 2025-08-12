@@ -62,24 +62,24 @@ export default function NotableGamesTable({ best, worst, brutal, pathetic }: Not
       <div className="relative w-full overflow-auto rounded-lg">
         <table className="table">
           <thead className="bg-indigo-900">
-            <tr className="border-b border-black">
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Matchup</th>
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Year</th>
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Week</th>
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Score</th>
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Margin</th>
-              <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle font-medium text-indigo-100 whitespace-nowrap text-[11px] sm:text-xs">Notability</th>
+            <tr>
+              <th>Matchup</th>
+              <th className="text-center">Year</th>
+              <th className="text-center">Week</th>
+              <th className="text-center">Score</th>
+              <th className="text-center">Margin</th>
+              <th className="text-center">Notability</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+          <tbody>
             {rows.map((r, i) => (
-              <tr key={`${r.year}-${r.week}-${i}`} className="hover:bg-white/10 transition-colors border-b border-black">
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white">{r.matchup}</td>
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">{r.year}</td>
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">{r.week}</td>
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">{r.score}</td>
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">{r.margin.toFixed(2)}</td>
-                <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 text-[12px] sm:text-sm text-white text-center">
+              <tr key={`${r.year}-${r.week}-${i}`}>
+                <td>{r.matchup}</td>
+                <td className="text-center">{r.year}</td>
+                <td className="text-center">{r.week}</td>
+                <td className="text-center">{r.score}</td>
+                <td className="text-center">{r.margin.toFixed(2)}</td>
+                <td className="text-center">
                   <div className="w-full h-2.5 sm:h-3 rounded-full bg-white/10 overflow-hidden">
                     <div
                       className={`h-full rounded-full bg-gradient-to-r from-indigo-400 to-purple-400`}
