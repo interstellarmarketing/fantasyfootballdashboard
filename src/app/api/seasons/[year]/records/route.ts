@@ -6,10 +6,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ year: string }> }
+  context: unknown
 ) {
-  const resolvedParams = await params;
-  const year = parseInt(resolvedParams.year, 10);
+  const { params } = context as { params: { year: string } };
+  const year = parseInt(params.year, 10);
 
   const records = await prisma.leagueRecord.findMany({
     where: { season_year: year },

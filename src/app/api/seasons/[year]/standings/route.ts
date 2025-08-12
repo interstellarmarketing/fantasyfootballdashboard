@@ -4,8 +4,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request, context: { params: { year: string } }) {
-  const params = await context.params;
+export async function GET(
+  request: Request,
+  context: unknown
+) {
+  const { params } = context as { params: { year: string } };
   const year = parseInt(params.year, 10);
 
   const standings = await prisma.teamSeasonStats.findMany({
