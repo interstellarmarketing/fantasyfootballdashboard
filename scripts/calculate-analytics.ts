@@ -87,15 +87,21 @@ async function main() {
     const teamScoresByWeek: { [teamId: number]: { [week: number]: number } } = {};
     
     for (const matchup of matchupsWithScores) {
+      // Ensure container for home team always exists
       if (!teamScoresByWeek[matchup.home_team_id]) {
         teamScoresByWeek[matchup.home_team_id] = {};
       }
-      if (!teamScoresByWeek[matchup.away_team_id]) {
-        teamScoresByWeek[matchup.away_team_id] = {};
+      // Only create container for away team if it exists (bye weeks have null away team)
+      if (matchup.away_team_id != null) {
+        if (!teamScoresByWeek[matchup.away_team_id]) {
+          teamScoresByWeek[matchup.away_team_id] = {};
+        }
       }
       
       teamScoresByWeek[matchup.home_team_id][matchup.week] = matchup.home_score;
-      teamScoresByWeek[matchup.away_team_id][matchup.week] = matchup.away_score;
+      if (matchup.away_team_id != null) {
+        teamScoresByWeek[matchup.away_team_id][matchup.week] = matchup.away_score;
+      }
     }
     
     // Debug: Check how many teams have data for each week
