@@ -94,14 +94,16 @@ export async function GET(
 
         // Determine which team is home and which is away
         const isTeam1Home = matchup.home_team_id === team1Id;
-        const homeTeam = isTeam1Home ? matchup.home_team : matchup.away_team;
-        const awayTeam = isTeam1Home ? matchup.away_team : matchup.home_team;
+        const homeTeamEntity = isTeam1Home ? matchup.home_team : matchup.away_team;
+        const awayTeamEntity = isTeam1Home ? matchup.away_team : matchup.home_team;
         const homeScore = isTeam1Home ? matchup.home_score : matchup.away_score;
         const awayScore = isTeam1Home ? matchup.away_score : matchup.home_score;
+        const homeTeamIdNum = isTeam1Home ? matchup.home_team_id : (matchup.away_team_id ?? -1);
+        const awayTeamIdNum = isTeam1Home ? (matchup.away_team_id ?? -1) : matchup.home_team_id;
 
-        // Filter players by team
-        const homePlayers = matchup.box_score_players.filter(player => player.team_id === homeTeam.id);
-        const awayPlayers = matchup.box_score_players.filter(player => player.team_id === awayTeam.id);
+        // Filter players by team using team IDs to avoid null entity issues
+        const homePlayers = matchup.box_score_players.filter(player => player.team_id === homeTeamIdNum);
+        const awayPlayers = matchup.box_score_players.filter(player => player.team_id === awayTeamIdNum);
 
         // Process player data
         type PlayerRow = Prisma.BoxScorePlayerGetPayload<{ include: { player: true; team: true } }>;
@@ -128,14 +130,14 @@ export async function GET(
             week: week,
             is_playoff: matchup.is_playoff,
             home_team: {
-                id: homeTeam.id,
-                name: homeTeam.team_name,
+                id: homeTeamIdNum,
+                name: homeTeamEntity?.team_name ?? 'TBD',
                 score: homeScore,
                 players: processPlayers(homePlayers)
             },
             away_team: {
-                id: awayTeam.id,
-                name: awayTeam.team_name,
+                id: awayTeamIdNum,
+                name: awayTeamEntity?.team_name ?? 'BYE',
                 score: awayScore,
                 players: processPlayers(awayPlayers)
             },
