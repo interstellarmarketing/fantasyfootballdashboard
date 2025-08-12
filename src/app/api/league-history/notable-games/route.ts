@@ -146,9 +146,9 @@ export async function GET() {
         .map((t) => t.TeamSeasonStats?.combined_rank ?? Number.POSITIVE_INFINITY)
         .filter((r) => Number.isFinite(r)) as number[];
       if (ranks.length === 0) return 0.5;
-      const myRank = team.TeamSeasonStats?.combined_rank;
-      if (!Number.isFinite(myRank)) return 0.5;
-      const worse = ranks.filter((r) => r > myRank).length;
+      const myRankValue = team.TeamSeasonStats?.combined_rank;
+      if (myRankValue === undefined || !Number.isFinite(myRankValue)) return 0.5;
+      const worse = ranks.filter((r) => r > myRankValue).length;
       return (worse + 1) / (ranks.length + 1);
     }
 
