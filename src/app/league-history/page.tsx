@@ -74,49 +74,49 @@ export default function LeagueHistoryPage() {
       
       {data && (
         <>
-         <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-md rounded-lg">
-            <div className="bg-indigo-900 px-3 py-3 border-b border-white/10 rounded-t-md -mx-2 sm:-mx-4 mb-2 sm:mb-3">
+          <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-md rounded-lg">
+            <div className="card-header">
               <h2 className="text-white font-bold text-lg">All-Time Franchise Rankings</h2>
             </div>
             <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
               <table className="table">
-                <thead className="bg-indigo-900">
-                  <tr className="border-b border-black">
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Rank</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Team</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Owner</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Record</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Win %</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Seasons</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-center align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">League Rating</th>
-                    <th className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">Trophies</th>
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Team</th>
+                    <th>Owner</th>
+                    <th className="text-center">Record</th>
+                    <th className="text-center">Win %</th>
+                    <th className="text-center">Seasons</th>
+                    <th className="text-center">League Rating</th>
+                    <th>Trophies</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+                <tbody>
                   {data.all_time_standings.map((team, index) => (
-                    <tr key={`${team.team_name}-${team.owner_name}`} className="hover:bg-white/10 transition-colors border-b border-black">
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm font-medium text-white text-left">
+                    <tr key={`${team.team_name}-${team.owner_name}`}>
+                      <td className="font-medium">
                         {index + 1}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm font-semibold text-white text-left">
+                      <td className="font-semibold">
                         {team.team_name}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/80 text-left">
+                      <td>
                         {team.owner_name}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/80 text-center">
+                      <td className="text-center">
                         {team.record}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/80 text-center">
+                      <td className="text-center">
                         {team.win_pct}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/80 text-center">
+                      <td className="text-center">
                         {team.seasons_played}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm font-bold text-white text-center">
+                      <td className="font-bold text-center">
                         {team.league_rating}
                       </td>
-                      <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-lg text-white text-left">
+                      <td className="text-lg">
                         {team.trophies}
                       </td>
                     </tr>

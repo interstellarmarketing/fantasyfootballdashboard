@@ -51,7 +51,7 @@ export default function ScoringWeeksTable({ records, standings, type }: ScoringW
     return (
         <div className="card card--gradient rounded-lg shadow-lg overflow-hidden">
             {/* Header */}
-            <div className="bg-indigo-900 px-3 py-3 border-b border-white/10">
+            <div className="card-header">
                 <h3 className="text-white font-bold text-lg flex items-center">
                     {title}
                     <span className="ml-2 text-xl">{emoji}</span>
@@ -70,7 +70,7 @@ export default function ScoringWeeksTable({ records, standings, type }: ScoringW
                     </thead>
                     <tbody>
                         {sortedRecords.map((record) => (
-                            <tr key={`${record.team_id}-${record.week}`} className="hover:bg-white/10 transition-colors border-b border-black">
+                            <tr key={`${record.team_id}-${record.week}`}>
                                 <td>
                                     <Link 
                                         href={`/team/${record.team_id}`}

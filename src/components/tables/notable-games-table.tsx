@@ -37,7 +37,7 @@ export default function NotableGamesTable({ best, worst, brutal, pathetic }: Not
 
   return (
     <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-lg">
-      <div className="bg-indigo-900 px-3 py-3 border-b border-white/10 rounded-t-md -mx-2 sm:-mx-4 mb-2 sm:mb-3">
+      <div className="card-header">
         <h3 className="text-white font-bold text-lg">Notable Games</h3>
       </div>
 

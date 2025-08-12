@@ -88,7 +88,7 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
         </div>
         <button
           onClick={() => setShowInfoModal(true)}
-          className="p-1 rounded-full hover:bg-white/10 transition-colors"
+          className="btn--icon"
           title="Standings Categories Info"
           aria-label="Standings Categories Info"
         >

@@ -74,7 +74,7 @@ export default function TeamTiersTable({ standings }: TeamTiersTableProps) {
 
     return (
         <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 rounded-lg shadow-lg">
-            <div className="bg-indigo-900 px-3 py-3 border-b border-white/10 rounded-t-md -mx-2 sm:-mx-4 mb-2 sm:mb-3">
+            <div className="card-header">
                 <h3 className="text-white font-bold text-lg">Team Tiers</h3>
             </div>
 
@@ -95,23 +95,16 @@ export default function TeamTiersTable({ standings }: TeamTiersTableProps) {
                             </div>
                             <div className="space-y-1">
                                 {teams.map((team) => (
-                                    <div key={team.team_id} className="text-white hover:bg-white/10 rounded px-2 py-1.5 sm:py-2 transition-colors">
+                                    <div key={team.team_id} className="list-item">
                                         <Link 
                                             href={`/team/${team.team_id}`}
-                                            className="block text-white hover:text-gray-200 transition-colors"
+                                            className="block hover:text-gray-200 transition-colors"
                                         >
                                             <span className="inline-flex items-center gap-2 min-w-0 text-[12px] sm:text-sm">
                                                 {team.team.logo_url ? (
-                                                    <img
-                                                        src={team.team.logo_url}
-                                                        alt={`${team.team.team_name} logo`}
-                                                        className="w-6 h-6 sm:w-8 sm:h-8 rounded-full border border-white/20 object-cover shrink-0"
-                                                        loading="lazy"
-                                                    />
+                                                    <img src={team.team.logo_url} alt={`${team.team.team_name} logo`} className="avatar" loading="lazy" />
                                                 ) : (
-                                                    <span className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/20 flex items-center justify-center text-[11px] sm:text-sm font-bold shrink-0">
-                                                        {team.team.team_name.charAt(0)}
-                                                    </span>
+                                                    <span className="avatar-fallback">{team.team.team_name.charAt(0)}</span>
                                                 )}
                                                 <span className="break-words leading-6">{team.team.team_name}</span>
                                             </span>

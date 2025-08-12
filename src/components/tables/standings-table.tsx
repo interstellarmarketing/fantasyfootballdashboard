@@ -126,7 +126,7 @@ export default function StandingsTable({
                 <h3 className="text-base sm:text-lg font-semibold text-white">League Standings — {year}</h3>
                 <button
                     onClick={() => setShowInfoModal(true)}
-                    className="p-1 rounded-full hover:bg-white/10 transition-colors"
+                    className="btn--icon"
                     title="Standings Categories Info"
                 >
                     <Info className="w-5 h-5 text-purple-200" />

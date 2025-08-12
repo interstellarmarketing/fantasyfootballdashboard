@@ -389,35 +389,33 @@ function HistoryTable({ history }: { history: Season[] }) {
     const headers = ['Season', 'Team', 'Record', 'All-Play', 'Points (Avg)', 'Points Vs (Avg)', 'Luck', 'SOS', 'Season Score', 'Rank'];
 
     return (
-        <table className="w-full table-auto caption-bottom text-[12px] sm:text-sm">
-            <thead className="bg-indigo-900">
-                <tr className="border-b border-black">
+        <table className="table">
+            <thead>
+                <tr>
                     {headers.map(h => (
-                        <th key={h} className="h-10 sm:h-12 px-1.5 sm:px-2 text-left align-middle text-indigo-100 uppercase tracking-wider font-medium text-[11px] sm:text-xs">
-                            {h}
-                        </th>
+                        <th key={h}>{h}</th>
                     ))}
                 </tr>
             </thead>
-            <tbody className="divide-y divide-white/10 [&_tr:last-child]:border-0">
+            <tbody>
                 {history.map((season) => (
-                    <tr key={season.year} className="hover:bg-white/10 transition-colors border-b border-black">
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap font-bold text-white">{season.year}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white">{season.team_name}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white">{season.record}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/70">{season.all_play_record}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white">
+                    <tr key={season.year}>
+                        <td className="font-bold">{season.year}</td>
+                        <td>{season.team_name}</td>
+                        <td>{season.record}</td>
+                        <td className="text-white/70">{season.all_play_record}</td>
+                        <td>
                             {season.points_for.toFixed(2)} ({season.points_for_avg.toFixed(2)})
                         </td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white">
+                        <td>
                             {season.points_vs.toFixed(2)} ({season.points_vs_avg.toFixed(2)})
                         </td>
-                        <td className={`py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap font-semibold ${season.luck > 0 ? 'text-green-300' : 'text-red-300'}`}>
+                        <td className={season.luck > 0 ? 'text-green-300 font-semibold' : 'text-red-300 font-semibold'}>
                             {season.luck > 0 ? '+' : ''}{season.luck.toFixed(2)}
                         </td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-[12px] sm:text-sm text-white/70">{season.sos.toFixed(2)}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap font-bold text-blue-300">{season.season_score.toFixed(2)}</td>
-                        <td className="py-1.5 sm:py-2 px-1 sm:px-1.5 whitespace-nowrap text-lg font-bold text-center text-white">
+                        <td className="text-white/70">{season.sos.toFixed(2)}</td>
+                        <td className="font-bold text-blue-300">{season.season_score.toFixed(2)}</td>
+                        <td className="text-lg font-bold text-center">
                             {season.rank}{season.trophy}
                         </td>
                     </tr>
