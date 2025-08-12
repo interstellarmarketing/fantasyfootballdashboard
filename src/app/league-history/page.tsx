@@ -79,7 +79,7 @@ export default function LeagueHistoryPage() {
               <h2 className="text-white font-bold text-lg">All-Time Franchise Rankings</h2>
             </div>
             <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
-              <table className="table">
+              <table className="table table--nowrap table--dense">
                 <thead>
                   <tr>
                     <th>Rank</th>
