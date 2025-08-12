@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-type NotableItem = {
+export type NotableItem = {
   year: number;
   week: number;
   matchup: string;
@@ -96,5 +96,3 @@ export default function NotableGamesTable({ best, worst, brutal, pathetic }: Not
     </div>
   );
 }
-
-

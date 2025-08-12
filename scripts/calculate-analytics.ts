@@ -316,14 +316,13 @@ async function main() {
       });
     }
     
-    // Calculate ranks for each category
-    const sortedByActual = [...teamAnalytics].sort((a, b) => {
+    // Calculate ranks for each category (actual rank will use final_standing with record-based fallback)
+    const sortedByRecord = [...teamAnalytics].sort((a, b) => {
       const aWinPct = a.wins / (a.wins + a.losses + a.ties);
       const bWinPct = b.wins / (b.wins + b.losses + b.ties);
       if (aWinPct !== bWinPct) return bWinPct - aWinPct;
       return b.points_for - a.points_for;
     });
-    
     const sortedByPower = [...teamAnalytics].sort((a, b) => {
       const aWinPct = a.power_wins / (a.power_wins + a.power_losses);
       const bWinPct = b.power_wins / (b.power_wins + b.power_losses);
@@ -350,7 +349,9 @@ async function main() {
       const analytics = teamAnalytics.find(t => t.team_id === team.id);
       if (!analytics) continue;
       
-      const actualRank = sortedByActual.findIndex(t => t.team_id === team.id) + 1;
+      const actualRank = team.final_standing && team.final_standing > 0
+        ? team.final_standing
+        : (sortedByRecord.findIndex(t => t.team_id === team.id) + 1);
       const powerRank = sortedByPower.findIndex(t => t.team_id === team.id) + 1;
       const medianRank = sortedByMedian.findIndex(t => t.team_id === team.id) + 1;
       const combinedRank = sortedByCombined.findIndex(t => t.team_id === team.id) + 1;

@@ -179,7 +179,7 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
             <div className="space-y-5">
               <div>
                 <div className="font-semibold text-white flex items-center gap-2">Actual <span>🏆</span></div>
-                <p className="text-purple-200">Based on wins and losses against your weekly opponent.</p>
+                <p className="text-purple-200">Based on each team\'s final finishing place for the season.</p>
               </div>
               <hr className="border-white/10" />
               <div>

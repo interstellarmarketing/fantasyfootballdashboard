@@ -26,28 +26,40 @@ export async function GET(
             return NextResponse.json({ error: "No matchups found for this year" }, { status: 404 });
         }
 
-        // Process matchups into a more usable format
-        const processedMatchups = matchups.map(matchup => {
-            const winner = matchup.home_score > matchup.away_score ? matchup.home_team.team_name : 
-                         matchup.away_score > matchup.home_score ? matchup.away_team.team_name : 'Tie';
-            
+        // Process matchups into a more usable format (handle BYE/null away team)
+        const processedMatchups = matchups.map((matchup) => {
+            const homeName = matchup.home_team?.team_name ?? 'Unknown';
+            const homeLogo = matchup.home_team?.logo_url ?? null;
+            const awayName = matchup.away_team?.team_name ?? 'BYE';
+            const awayLogo = matchup.away_team?.logo_url ?? null;
+            const awayId = matchup.away_team_id ?? null;
+
+            const winner =
+                matchup.home_score > matchup.away_score
+                    ? homeName
+                    : matchup.away_score > matchup.home_score
+                    ? awayName
+                    : 'Tie';
+
             return {
                 id: matchup.id,
                 week: matchup.week,
                 is_playoff: matchup.is_playoff,
-                home_team: matchup.home_team.team_name,
+                home_team: homeName,
                 home_team_id: matchup.home_team_id,
-                home_team_logo: matchup.home_team.logo_url ?? null,
+                home_team_logo: homeLogo,
                 home_score: matchup.home_score,
-                away_team: matchup.away_team.team_name,
-                away_team_id: matchup.away_team_id,
-                away_team_logo: matchup.away_team.logo_url ?? null,
+                away_team: awayName,
+                away_team_id: awayId,
+                away_team_logo: awayLogo,
                 away_score: matchup.away_score,
                 winner: winner,
                 margin: Math.abs(matchup.home_score - matchup.away_score),
                 total_score: matchup.home_score + matchup.away_score,
                 round: matchup.is_playoff ? getPlayoffRound(matchup.week) : `Week ${matchup.week}`,
-                detail_link: `/matchups/${year}/${matchup.week}/${matchup.home_team_id}/${matchup.away_team_id}`
+                detail_link: awayId
+                    ? `/matchups/${year}/${matchup.week}/${matchup.home_team_id}/${awayId}`
+                    : '#',
             };
         });
 

@@ -28,7 +28,7 @@ export default function Header() {
       <div className="container mx-auto px-6 py-3">
         <div className="flex justify-between items-center">
           <Link href="/" className="font-bold text-xl hover:text-gray-300 transition-colors">
-            Toad League
+            League of Toads
           </Link>
           
           {/* Desktop Menu */}

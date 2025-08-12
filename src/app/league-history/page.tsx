@@ -2,7 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchJSON } from '@/lib/api';
-import NotableGamesTable from '@/components/tables/notable-games-table';
+import NotableGamesTable, { NotableItem } from '@/components/tables/notable-games-table';
+import FranchiseRankingsTable from '@/components/tables/franchise-rankings-table';
 
 interface LeagueHistoryData {
   all_time_standings: Array<{
@@ -21,10 +22,10 @@ interface LeagueHistoryData {
 }
 
 interface NotableGamesData {
-  best_games: any[];
-  worst_games: any[];
-  brutal_losses: any[];
-  pathetic_wins: any[];
+  best_games: NotableItem[];
+  worst_games: NotableItem[];
+  brutal_losses: NotableItem[];
+  pathetic_wins: NotableItem[];
 }
 
 export default function LeagueHistoryPage() {
@@ -74,57 +75,7 @@ export default function LeagueHistoryPage() {
       
       {data && (
         <>
-          <div className="card card--gradient px-2 py-4 sm:px-4 sm:py-6 shadow-md rounded-lg">
-            <div className="card-header">
-              <h2 className="text-white font-bold text-lg">All-Time Franchise Rankings</h2>
-            </div>
-            <div className="relative w-full overflow-auto px-2 py-2 sm:px-4 sm:py-4">
-              <table className="table table--nowrap table--dense">
-                <thead>
-                  <tr>
-                    <th>Rank</th>
-                    <th>Team</th>
-                    <th>Owner</th>
-                    <th className="text-center">Record</th>
-                    <th className="text-center">Win %</th>
-                    <th className="text-center">Seasons</th>
-                    <th className="text-center">League Rating</th>
-                    <th>Trophies</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.all_time_standings.map((team, index) => (
-                    <tr key={`${team.team_name}-${team.owner_name}`}>
-                      <td className="font-medium">
-                        {index + 1}
-                      </td>
-                      <td className="font-semibold">
-                        {team.team_name}
-                      </td>
-                      <td>
-                        {team.owner_name}
-                      </td>
-                      <td className="text-center">
-                        {team.record}
-                      </td>
-                      <td className="text-center">
-                        {team.win_pct}
-                      </td>
-                      <td className="text-center">
-                        {team.seasons_played}
-                      </td>
-                      <td className="font-bold text-center">
-                        {team.league_rating}
-                      </td>
-                      <td className="text-lg">
-                        {team.trophies}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <FranchiseRankingsTable standings={data.all_time_standings} />
 
           {/* Notable Games */}
           {notable && (
@@ -136,7 +87,7 @@ export default function LeagueHistoryPage() {
             />
           )}
         </>
-         )}
+      )}
     </div>
   );
 } 
