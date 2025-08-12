@@ -59,7 +59,9 @@ async function calculatePowerStandings(year: number, teams: TeamBasics[]) {
             scoresByWeekAndTeam[matchup.week] = {};
         }
         scoresByWeekAndTeam[matchup.week][matchup.home_team_id] = matchup.home_score;
-        scoresByWeekAndTeam[matchup.week][matchup.away_team_id] = matchup.away_score;
+        if (matchup.away_team_id != null) {
+            scoresByWeekAndTeam[matchup.week][matchup.away_team_id] = matchup.away_score;
+        }
     }
 
     // Debug: Log team IDs and names
@@ -158,7 +160,9 @@ async function calculateMedianStandings(year: number, teams: TeamBasics[]) {
             scoresByWeekAndTeam[matchup.week] = {};
         }
         scoresByWeekAndTeam[matchup.week][matchup.home_team_id] = matchup.home_score;
-        scoresByWeekAndTeam[matchup.week][matchup.away_team_id] = matchup.away_score;
+        if (matchup.away_team_id != null) {
+            scoresByWeekAndTeam[matchup.week][matchup.away_team_id] = matchup.away_score;
+        }
     }
 
     // Calculate median scores for each week
