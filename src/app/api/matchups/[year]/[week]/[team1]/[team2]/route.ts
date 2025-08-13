@@ -122,8 +122,8 @@ export async function GET(
             }));
         };
 
-        const winner = homeScore > awayScore ? homeTeam.team_name : 
-                      awayScore > homeScore ? awayTeam.team_name : 'Tie';
+        const winner = homeScore > awayScore ? (homeTeamEntity?.team_name ?? 'TBD') : 
+                      awayScore > homeScore ? (awayTeamEntity?.team_name ?? 'BYE') : 'Tie';
 
         return NextResponse.json({
             year: year,
