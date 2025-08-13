@@ -17,7 +17,16 @@ export async function GET() {
         });
 
         // Calculate records
-        const records = {
+        type MatchupRecord = { matchup: string; year: number; value: number; score?: string; margin?: string };
+        type TeamRecord = { team: string; year: number; value: number };
+        const records: {
+            shootouts: MatchupRecord[];
+            snoozers: MatchupRecord[];
+            blowouts: MatchupRecord[];
+            nailbiters: MatchupRecord[];
+            top_scores: TeamRecord[];
+            low_scores: TeamRecord[];
+        } = {
             shootouts: [],
             snoozers: [],
             blowouts: [],
