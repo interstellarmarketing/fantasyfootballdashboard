@@ -39,14 +39,16 @@ interface TeamHistoryProps {
     teamId: string;
 }
 
+type SortKey = 'year' | 'season_score' | 'rank' | 'luck';
+
 export default function TeamHistory({ teamId }: TeamHistoryProps) {
-    const [sortKey, setSortKey] = useState('year');
+    const [sortKey, setSortKey] = useState<SortKey>('year');
 
     const { data, isLoading, error } = useQuery<TeamHistoryData>({
         queryKey: ['teamHistory', teamId],
         queryFn: () => fetchJSON(`/api/teams/history/${teamId}`),
         staleTime: 5 * 60 * 1000, // 5 minutes
-        cacheTime: 10 * 60 * 1000, // 10 minutes
+        gcTime: 10 * 60 * 1000, // 10 minutes
     });
 
     // Memoize sorted history to prevent unnecessary re-renders
@@ -75,7 +77,7 @@ export default function TeamHistory({ teamId }: TeamHistoryProps) {
     }, [data?.season_history]);
 
     const handleSortChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSortKey(event.target.value);
+        setSortKey(event.target.value as SortKey);
     }, []);
 
     if (isLoading) {

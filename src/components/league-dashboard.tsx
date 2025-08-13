@@ -14,6 +14,8 @@ interface TeamSeasonStats {
     team_id: number;
     team: {
         team_name: string;
+        final_standing?: number;
+        logo_url?: string;
     };
     wins: number;
     losses: number;
@@ -24,6 +26,15 @@ interface TeamSeasonStats {
     power_rank: number;
     median_rank: number;
     combined_rank: number;
+    power_wins: number;
+    power_losses: number;
+    power_ties: number;
+    median_wins: number;
+    median_losses: number;
+    median_ties: number;
+    combined_wins: number;
+    combined_losses: number;
+    combined_ties: number;
     tier: string;
 }
 
