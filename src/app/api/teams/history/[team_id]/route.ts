@@ -159,8 +159,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ team_id:
             all_play_record: `${allPlayWins}-${allPlayLosses}`,
             points_for: team.points_for,
             points_for_avg: numGames > 0 ? team.points_for / numGames : 0,
-            points_vs: team.points_against,
-            points_vs_avg: numGames > 0 ? team.points_against / numGames : 0,
+            points_vs: team.points_against ?? 0,
+            points_vs_avg: numGames > 0 ? (team.points_against ?? 0) / numGames : 0,
             luck,
             sos: 0, // SOS calculation is complex and deferred
             season_score,
