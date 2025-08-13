@@ -158,7 +158,7 @@ export default function StandingsTable({
 
             {/* Table */}
             <div className="relative w-full overflow-auto rounded-lg">
-                <table className="table touch-pan-x">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Rank</th>
