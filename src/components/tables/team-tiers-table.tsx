@@ -6,6 +6,7 @@ interface TeamSeasonStats {
     team_id: number;
     team: {
         team_name: string;
+        espn_team_id: number;
         logo_url?: string;
     };
     wins: number;
@@ -97,7 +98,7 @@ export default function TeamTiersTable({ standings }: TeamTiersTableProps) {
                                 {teams.map((team) => (
                                     <div key={team.team_id} className="list-item">
                                         <Link 
-                                            href={`/team/${team.team_id}`}
+                                            href={`/team/${team.team.espn_team_id}`}
                                             className="block hover:text-gray-200 transition-colors"
                                         >
                                             <span className="inline-flex items-center gap-2 min-w-0 text-[12px] sm:text-sm">
@@ -135,7 +136,7 @@ export default function TeamTiersTable({ standings }: TeamTiersTableProps) {
                             {teams.map((team) => (
                                 <div key={team.team_id} className="text-white hover:bg-white/10 rounded px-2 py-1.5 sm:py-2 transition-colors">
                                     <Link 
-                                        href={`/team/${team.team_id}`}
+                                        href={`/team/${team.team.espn_team_id}`}
                                         className="block text-white hover:text-gray-200 transition-colors"
                                     >
                                         <span className="inline-flex items-center gap-2 min-w-0 text-[12px] sm:text-sm">

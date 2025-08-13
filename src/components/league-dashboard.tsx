@@ -14,6 +14,7 @@ interface TeamSeasonStats {
     team_id: number;
     team: {
         team_name: string;
+        espn_team_id: number;
         final_standing?: number;
         logo_url?: string;
     };

@@ -13,6 +13,7 @@ interface TeamSeasonStats {
     team_id: number;
     team: {
         team_name: string;
+        espn_team_id: number;
         logo_url?: string;
     };
 }
@@ -34,12 +35,12 @@ export default function ScoringWeeksTable({ records, standings, type }: ScoringW
         .filter(r => r.record_type === recordType)
         .slice(0, 5)
         .map(record => {
-            const team = standings.find(s => s.team_id === record.team_id);
+            const team = standings.find(s => s.team.espn_team_id === record.team_id || s.team_id === record.team_id);
             return {
                 ...record,
                 team_name: team?.team.team_name || 'Unknown Team',
                 team_logo: team?.team.logo_url || null,
-                team_id: record.team_id
+                team_id: team?.team.espn_team_id ?? record.team_id
             };
         });
 

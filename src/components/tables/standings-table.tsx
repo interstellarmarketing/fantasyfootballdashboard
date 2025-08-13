@@ -10,6 +10,7 @@ interface TeamSeasonStats {
     team: {
         team_name: string;
         final_standing?: number;
+        espn_team_id: number;
         logo_url?: string;
     };
     wins: number;
@@ -184,7 +185,7 @@ export default function StandingsTable({
                                     <td className="font-medium">
                                         <div className="flex items-center gap-2">
                                             <Link 
-                                                href={`/team/${team.team_id}`}
+                                                href={`/team/${team.team.espn_team_id}`}
                                                 className="flex items-center gap-2 min-w-0 flex-1 hover:text-gray-200 transition-colors"
                                             >
                                                 {team.team.logo_url ? (

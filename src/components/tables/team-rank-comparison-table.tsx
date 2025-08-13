@@ -8,6 +8,7 @@ interface TeamSeasonStats {
   team_id: number;
   team: {
     team_name: string;
+    espn_team_id: number;
     logo_url?: string | null;
   };
   actual_rank: number;
@@ -44,7 +45,7 @@ export default function TeamRankComparisonTable({ standings }: TeamRankCompariso
 
   const rows = useMemo(() => {
     const mapped = standings.map((t) => ({
-      team_id: t.team_id,
+      team_id: t.team.espn_team_id,
       team_name: t.team.team_name,
       logo_url: t.team.logo_url ?? undefined,
       actual_rank: t.actual_rank,
