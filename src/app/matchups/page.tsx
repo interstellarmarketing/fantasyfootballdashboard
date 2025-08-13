@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchJSON } from '@/lib/api';
-import MatchupsTable from '@/components/tables/matchups-table';
+import MatchupsTable, { MatchupRow } from '@/components/tables/matchups-table';
 
 interface Matchup {
   id: number;
@@ -53,11 +53,11 @@ export default function MatchupsPage() {
     setFilter(event.target.value as 'all' | 'regular' | 'playoff');
   };
 
-  const filteredMatchups = data?.matchups.filter(matchup => {
+  const filteredMatchups: MatchupRow[] = (data?.matchups || []).filter(matchup => {
     if (filter === 'regular') return !matchup.is_playoff;
     if (filter === 'playoff') return matchup.is_playoff;
     return true;
-  }) || [];
+  }) as unknown as MatchupRow[];
 
   const yearOptions = [];
   for (let y = currentYear - 1; y >= 2015; y--) {

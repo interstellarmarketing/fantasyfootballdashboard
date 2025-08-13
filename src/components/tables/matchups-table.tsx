@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-interface Matchup {
+export interface MatchupRow {
     id: number;
     week: number;
     is_playoff: boolean;
@@ -11,7 +11,7 @@ interface Matchup {
     home_team_logo?: string | null;
     home_score: number;
     away_team: string;
-    away_team_id: number;
+    away_team_id: number | null;
     away_team_logo?: string | null;
     away_score: number;
     winner: string;
@@ -22,7 +22,7 @@ interface Matchup {
 }
 
 interface MatchupsTableProps {
-    matchups: Matchup[];
+    matchups: MatchupRow[];
     title?: string;
 }
 
